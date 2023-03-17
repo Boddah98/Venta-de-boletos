@@ -1,6 +1,6 @@
 struct Asiento{
 	char* id;
-	int ocupado;
+	int estado;
 	struct Asiento *sig;
 }typedef Asiento;
 
