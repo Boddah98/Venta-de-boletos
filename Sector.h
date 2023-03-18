@@ -1,22 +1,38 @@
 struct Sector{
 	char* nombre;
 	int espacios;
-    char inicial;
+    char* inicial;
 	int montoXasiento;
     int montoRecaudado;
     ListaAsientos* listaAsientos;
 	struct Sector *sig;
 }typedef Sector;
 
-ListaAsientos* generarAsientos(char inicialP){}
+ListaAsientos* generarAsientos(char* inicialP, int espaciosP){
+	ListaAsientos* listaAsientos = crearListaAsientos();
 
-Sector* crearSector(char* nombreP, int espaciosP, char inicialP, int montoXasientoP){
+	char idNuevo[10];
+	int cont = 0;
+	while(cont < espaciosP){
+		sprintf(idNuevo, "%s%d", inicialP, cont);
+		char* idNuevoT = malloc((strlen(idNuevo)+1)*sizeof(char));
+		strcpy(idNuevoT, idNuevo);
+
+		Asiento* asientoNuevo = crearAsiento(idNuevoT);
+		agregarAsiento(asientoNuevo, listaAsientos);
+		cont++;
+		//strcpy(idNuevo, "");
+	}
+	return listaAsientos;
+}
+
+Sector* crearSector(char* nombreP, int espaciosP, char* inicialP, int montoXasientoP){
 	Sector* sectorNuevo = (Sector*) malloc (sizeof(Sector));
 	sectorNuevo-> nombre = nombreP;
     sectorNuevo-> espacios = espaciosP;
     sectorNuevo-> inicial = inicialP;
     sectorNuevo-> montoXasiento = montoXasientoP;
-    sectorNuevo-> listaAsientos = generarAsientos(inicialP);
+    sectorNuevo-> listaAsientos = generarAsientos(inicialP, espaciosP);
 	sectorNuevo-> sig = NULL;
 	return sectorNuevo;
 }
