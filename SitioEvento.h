@@ -14,4 +14,31 @@ Sitio* crearSitio (char* nombreP, char* ubicacionP, Pais* sitioWebP){
 	return sitioNuevo;
 }
 
-///Hola
+struct ListaSitios{
+	Sitio* primero;
+	Sitio* ultimo;
+	int vacio;
+	int contador;
+}typedef ListaSitios;
+
+ListaSitios* crearListaSitios(){
+	ListaSitios* listaNueva = (ListaSitios*) malloc (sizeof(ListaSitios));
+	listaNueva-> primero = NULL;
+	listaNueva-> ultimo = NULL;
+	listaNueva-> vacio = TRUE;
+	listaNueva-> contador = 0;
+	return listaNueva;
+}
+
+void agregarSitio(Sitio* sitio, ListaSitios* lista){
+	if (lista-> vacio == TRUE){
+		lista-> primero = sitio;
+		lista-> ultimo = sitio;
+		lista-> vacio = FALSE;
+
+	}else{
+		lista-> ultimo-> sig = sitio;
+		lista-> ultimo = sitio;
+	}
+	lista-> contador++;
+}
