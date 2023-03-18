@@ -1,6 +1,6 @@
 struct Asiento{
 	char* id;
-	int estado;
+	int ocupado;
 	struct Asiento *sig;
 }typedef Asiento;
 
@@ -32,11 +32,24 @@ void agregarAsiento(Asiento* asiento, ListaAsientos* lista){
 	if (lista-> vacio == TRUE){
 		lista-> primero = asiento;
 		lista-> ultimo = asiento;
-		lista-> vacio = asiento;
+		lista-> vacio = FALSE;
 
 	}else{
 		lista-> ultimo-> sig = asiento;
 		lista-> ultimo = asiento;
 	}
 	lista-> contador++;
+}
+
+void imprimirListaAsientos(ListaAsientos *lista) {
+	Asiento* asientoActual = lista->primero;
+
+	if(asientoActual != NULL) {
+		while(asientoActual != NULL){
+			printf("Id: %s \nEstado: %s\n\n", asientoActual->id, asientoActual->ocupado);
+			asientoActual = asientoActual->sig;
+		}
+	} else {
+		printf("No se ha agregado ningun asiento por ahora.\n\n");
+	}
 }
