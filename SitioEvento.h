@@ -1,3 +1,6 @@
+#define TRUE  1
+#define FALSE 0
+
 struct Sitio{
 	char* nombre;
 	char* ubicacion;
@@ -5,7 +8,7 @@ struct Sitio{
 	struct Sitio *sig;
 }typedef Sitio;
 
-Sitio* crearSitio (char* nombreP, char* ubicacionP, Pais* sitioWebP){
+Sitio* crearSitio (char* nombreP, char* ubicacionP, char* sitioWebP){
 	Sitio* sitioNuevo = (Sitio*) malloc (sizeof(Sitio));
 	sitioNuevo-> nombre = nombreP;
     sitioNuevo-> ubicacion = ubicacionP;
@@ -41,4 +44,17 @@ void agregarSitio(Sitio* sitio, ListaSitios* lista){
 		lista-> ultimo = sitio;
 	}
 	lista-> contador++;
+}
+
+void imprimirListaSitios(ListaSitios *lista) {
+	Sitio* sitioActual = lista->primero;
+
+	if(sitioActual != NULL) {
+		while(sitioActual != NULL){
+			printf("Nombre: %s \nUbicacion: %s\nSitio Web: %s\n\n", sitioActual->nombre, sitioActual->ubicacion, sitioActual->sitioWeb);
+			sitioActual = sitioActual->sig;
+		}
+	} else {
+		printf("No se ha agregado ningun sitio por ahora...\n\n");
+	}
 }
